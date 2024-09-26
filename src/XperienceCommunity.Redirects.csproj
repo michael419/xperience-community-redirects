@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Title>XperienceCommunity.Redirects</Title>
+        <Authors>Michael Eustace</Authors>
+        <Description>Adds a module to the Xperience by Kentico administration interface to enable the management of URL redirects for web pages in website channels.</Description>
+        <Copyright>Michael Eustace</Copyright>
+        <PackageProjectUrl>https://github.com/michael419/xperience-community-redirects/</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/michael419/xperience-community-redirects/</RepositoryUrl>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>kentico xperience urlredirects 301redirects</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Kentico.Xperience.Admin" Version="29.5.0" />
+      <PackageReference Include="Kentico.Xperience.Core" Version="29.5.0" />
+	  <None Include="..\README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+
+</Project>
