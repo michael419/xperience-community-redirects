@@ -56,17 +56,6 @@ internal class RedirectModuleInstaller(IInfoProvider<ResourceInfo> resourceInfoP
 
         var formItem = new FormFieldInfo
         {
-            Name = nameof(RedirectInfo.RedirectWebsiteChannelID),
-            Visible = true,
-            DataType = FieldDataType.Integer,
-            Enabled = true,
-            ReferenceToObjectType = ChannelInfo.OBJECT_TYPE,
-            ReferenceType = ObjectDependencyEnum.Required
-        };
-        formInfo.AddFormItem(formItem);
-
-        formItem = new FormFieldInfo
-        {
             Name = nameof(RedirectInfo.RedirectSourceUrl),
             Visible = true,
             DataType = FieldDataType.LongText,

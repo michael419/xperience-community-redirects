@@ -1,8 +1,6 @@
 using System;
 using System.Data;
 using System.Runtime.Serialization;
-using System.Collections.Generic;
-using System.Linq;
 
 using CMS;
 using CMS.DataEngine;
@@ -31,10 +29,6 @@ namespace XperienceCommunity.Redirects
         public static readonly ObjectTypeInfo TYPEINFO = new ObjectTypeInfo(typeof(IInfoProvider<RedirectInfo>), OBJECT_TYPE, "XperienceCommunity.Redirect", "RedirectID", null, "RedirectGUID", null, "RedirectSourceUrl", null, null, null)
         {
             TouchCacheDependencies = true,
-            DependsOn = new List<ObjectDependency>()
-            {
-                new ObjectDependency("RedirectWebsiteChannelID", "cms.channel", ObjectDependencyEnum.Required),
-            },
         };
 
 
@@ -79,17 +73,6 @@ namespace XperienceCommunity.Redirects
         {
             get => ValidationHelper.GetGuid(GetValue(nameof(RedirectTargetWebPageItemGUID)), Guid.Empty);
             set => SetValue(nameof(RedirectTargetWebPageItemGUID), value);
-        }
-
-
-        /// <summary>
-        /// Redirect website channel ID.
-        /// </summary>
-        [DatabaseField]
-        public virtual int RedirectWebsiteChannelID
-        {
-            get => ValidationHelper.GetInteger(GetValue(nameof(RedirectWebsiteChannelID)), 0);
-            set => SetValue(nameof(RedirectWebsiteChannelID), value);
         }
 
 
