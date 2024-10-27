@@ -15,14 +15,24 @@
         <RepositoryType>git</RepositoryType>
         <PackageTags>kentico xperience urlredirects 301redirects</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<Version>1.0.1</Version>
+		<Version>1.0.3</Version>
 		<PackageReleaseNotes>Fixed an issue where it was not possible to create redirects</PackageReleaseNotes>
+		<PackageIcon>logo.png</PackageIcon>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Kentico.Xperience.Admin" Version="29.5.0" />
       <PackageReference Include="Kentico.Xperience.Core" Version="29.5.0" />
+      <None Include="..\images\logo.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+        <Link>logo.png</Link>
+      </None>
 	  <None Include="..\README.md" Pack="true" PackagePath="\"/>
+	  <None Update="logo.png">
+	    <Pack>True</Pack>
+	    <PackagePath></PackagePath>
+	  </None>
     </ItemGroup>
 
 </Project>
