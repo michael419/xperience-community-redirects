@@ -32,8 +32,9 @@ Clicking `New redirect` will enable you to create a new redirect, entering the `
 - The functionality will attempt to redirect the user to the correct language variant of the target page by analyzing the source URL for the presence of a culture code (e.g. `en-GB`) or a language name (e.g. `en`) URL prefix.
 - Users will be redirected based on the target page's `canonical URL` setting, whether it is the `system URL` or the `vanity URL` defined for the page.
 - Only relative URLs are supported for `source URLs` at this time. Absolute URLs are not supported.
-- The redirects middleware is placed later in the request pipeline that the Kentico middleware, meaning that Kentico's URL
-- The custom redirect middleware is placed after Kentico's own middleware in the request pipeline, ensuring that any Kentico-developed URL redirect functionality takes priority over any custom redirects.
+- The redirects middleware is placed later in the request pipeline than the Kentico middleware, meaning that Kentico's own URL redirect functionality (e.g. former URLs) takes president.
+- By default, redirects are enabled for use with the Continuous Integration and Continuous Deployment features of Xperience by Kentico. This enables developers to prepare redirects in a local development environment, share them amongst other team members working on the same project, as well as deploy them to environments in their deployment pipeline.
+  - You can explicitly include or exclude the redirects object type from CI and CD features using the `xperiencecommunity.redirect` object name in your `repository.config` files.
 
 ## Library Version Matrix
 
@@ -44,7 +45,7 @@ Clicking `New redirect` will enable you to create a new redirect, entering the `
 ## Dependencies
 
 - [ASP.NET Core 8.0](https://dotnet.microsoft.com/en-us/download)
-- [Xperience by Kentico](https://docs.xperience.io/xp/changelog)
+- [Xperience by Kentico](https://docs.kentico.com/changelog)
 
 ## Package Installation
 
