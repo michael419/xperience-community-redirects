@@ -16,7 +16,6 @@ public class RedirectMiddleware
     
     private string[] ExcludedStartingPaths = new []
     {
-        "/",
         "/cmsctx",
         "/admin",
         "/getmedia",
@@ -37,6 +36,12 @@ public class RedirectMiddleware
     
     public async Task InvokeAsync(HttpContext context)
     {
+        if (!context.Request.Headers.Accept.ToString().Contains("text/html", StringComparison.OrdinalIgnoreCase))
+        {
+            await _next(context);
+            return;
+        }
+        
         string requestPath = context.Request.Path.Value?.ToLower() ?? string.Empty;
 
         foreach (string excludedPath in ExcludedStartingPaths)
@@ -44,6 +49,7 @@ public class RedirectMiddleware
             if (context.Request.Path.StartsWithSegments(excludedPath, StringComparison.OrdinalIgnoreCase))
             {
                 await _next(context);
+                return;
             }
         }
         
@@ -52,6 +58,7 @@ public class RedirectMiddleware
         if (allRedirects == null || allRedirects.Count == 0)
         {
             await _next(context);
+            return;
         }
         
         RedirectInfo matchingRedirectInfo = allRedirects.FirstOrDefault(r => r.RedirectSourceUrl == requestPath);
