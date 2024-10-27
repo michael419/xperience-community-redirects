@@ -87,6 +87,16 @@ internal class RedirectModuleInstaller(IInfoProvider<ResourceInfo> resourceInfoP
         };
         formItem.SetComponentName(WebPageSelectorComponent.IDENTIFIER);
         formInfo.AddFormItem(formItem);
+        
+        formItem = new FormFieldInfo
+        {
+            Name = nameof(RedirectInfo.RedirectGUID),
+            Visible = false,
+            DataType = FieldDataType.Guid,
+            Enabled = true,
+            AllowEmpty = false,
+        };
+        formInfo.AddFormItem(formItem);
 
         SetFormDefinition(info, formInfo);
 
@@ -94,6 +104,8 @@ internal class RedirectModuleInstaller(IInfoProvider<ResourceInfo> resourceInfoP
         {
             DataClassInfoProvider.SetDataClassInfo(info);
         }
+
+        PopulateRedirectGUIDs();
     }
 
     /// <summary>
@@ -112,6 +124,23 @@ internal class RedirectModuleInstaller(IInfoProvider<ResourceInfo> resourceInfoP
         else
         {
             info.ClassFormDefinition = form.GetXmlDefinition();
+        }
+    }
+    
+    /// <summary>
+    /// Retrospectively populates the RedirectGUID field for records created using version < v1.0.3 of this package
+    /// </summary>
+    private static void PopulateRedirectGUIDs()
+    {
+        List<RedirectInfo> redirectsWithEmptyGuids = RedirectInfo.Provider.Get().WhereEquals(nameof(RedirectInfo.RedirectGUID), Guid.Empty).ToList();
+
+        if (redirectsWithEmptyGuids.Any())
+        {
+            foreach (RedirectInfo redirect in redirectsWithEmptyGuids)
+            {
+                redirect.RedirectGUID = new Guid();
+                redirect.Update();
+            }
         }
     }
 }
